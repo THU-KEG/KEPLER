@@ -5,7 +5,7 @@ Source code for TACL 2021 paper [KEPLER: A Unified Model for Knowledge Embedding
 ## Preliminaries
 
 - This code is developed on top of [fairseq](https://github.com/pytorch/fairseq). Refer to [its documentation](/fairseqREADME.md) for the installation and basic usage.
-- Pre-training requires the [Wikidata5M dataset](https://bakser.github.io/files/TACL-KEPLER/KEPLER.pdf).
+- Pre-training requires the [Wikidata5M dataset](https://deepgraphlearning.github.io/project/wikidata5m).
 
 ## Pre-training
 
@@ -63,18 +63,17 @@ srun --output slurm/%j.%t.out --error slurm/%j.%t.err \
         --reset-optimizer --distributed-world-size ${DIST_SIZE} --ddp-backend no_c10d --distributed-port 23456 \
         --log-format simple --log-interval 1 \
         #--relation-desc  #Add this option to encode the relation descriptions as relation embeddings (KEPLER-Rel in the paper)
-
 ```
 
 **Note:** The above command assumes distributed training on 64x16GB V100 GPUs, 16 machines. If you have fewer GPUs or GPUs with less memory you may need to reduce `$MAX_SENTENCES` and increase `$UPDATE_FREQ` to compensate. Alternatively if you have more GPUs you can decrease `$UPDATE_FREQ` accordingly to increase training speed.
 
-**Note:** If you are interested in the detailed implementations. The main implementations are in [tasks/MLMetKE.py](fairseq/tasks/MLMetKE.py) and [criterions/MLMetKE.py](fairseq/criterions/MLMetKE.py). We encourage to master the fairseq toolkit before learning the KEPLER implementation details.
+**Note:** If you are interested in the detailed implementations. The main implementations are in [tasks/MLMetKE.py](fairseq/tasks/MLMetKE.py) and [criterions/MLMetKE.py](fairseq/criterions/MLMetKE.py). We encourage to master the fairseq toolkit before learning KEPLER implementation details.
 
 ## Fine-tuning
 
-We release the pre-trained [checkpoint for KE tasks](https://cloud.tsinghua.edu.cn/f/749183d2541c43a08568/?dl=1) and [checkpoint for NLP tasks](). 
+We release the pre-trained [checkpoint for KE tasks](https://cloud.tsinghua.edu.cn/f/749183d2541c43a08568/?dl=1) and [checkpoint for NLP tasks](https://cloud.tsinghua.edu.cn/f/e03f7a904526498c81a4/?dl=1). 
 
-Fine-tuning details are to be finished.
+Fine-tuning details are coming soon.
 
 ## Citation
 
