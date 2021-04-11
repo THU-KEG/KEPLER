@@ -1,6 +1,6 @@
 # KEPLER: A Unified Model for Knowledge Embedding and Pre-trained Language Representation
 
-Source code for TACL 2021 paper [KEPLER: A Unified Model for Knowledge Embedding and Pre-trained Language Representation](https://bakser.github.io/files/TACL-KEPLER/KEPLER.pdf).
+Source code for TACL 2021 paper [KEPLER: A Unified Model for Knowledge Embedding and Pre-trained Language Representation](https://direct.mit.edu/tacl/article/doi/10.1162/tacl_a_00360/98089/KEPLER-A-Unified-Model-for-Knowledge-Embedding-and).
 
 ## Preliminaries
 
@@ -35,8 +35,7 @@ KE_DATA=$DATA_DIR/KEI/KEI1_0:$DATA_DIR/KEI/KEI1_1:$DATA_DIR/KEI/KEI1_2:$DATA_DIR
 
 DIST_SIZE=`expr $SLURM_JOB_NUM_NODES \* 4`
 
-srun --output slurm/%j.%t.out --error slurm/%j.%t.err \
-    fairseq-train $DATA_DIR/MLM \                #Path to the preprocessed MLM datasets
+fairseq-train $DATA_DIR/MLM \                #Path to the preprocessed MLM datasets
         --KEdata $KE_DATA \                      #Path to the preprocessed KE datasets
         --restore-file $ROBERTA_PATH \
         --save-dir $CHECKPOINT_PATH \
@@ -69,11 +68,55 @@ srun --output slurm/%j.%t.out --error slurm/%j.%t.err \
 
 **Note:** If you are interested in the detailed implementations. The main implementations are in [tasks/MLMetKE.py](fairseq/tasks/MLMetKE.py) and [criterions/MLMetKE.py](fairseq/criterions/MLMetKE.py). We encourage to master the fairseq toolkit before learning KEPLER implementation details.
 
-## Fine-tuning
+## Usage for NLP Tasks
 
-We release the pre-trained [checkpoint for KE tasks](https://cloud.tsinghua.edu.cn/f/749183d2541c43a08568/?dl=1) and [checkpoint for NLP tasks](https://cloud.tsinghua.edu.cn/f/e03f7a904526498c81a4/?dl=1). 
+We release the pre-trained [checkpoint for NLP tasks](https://cloud.tsinghua.edu.cn/f/e03f7a904526498c81a4/?dl=1). Since KEPLER does not modify RoBERTa model architectures, the KEPLER checkpoint can be directly used in the same way as RoBERTa checkpoints in the downstream NLP tasks.
 
-Fine-tuning details are coming soon.
+### Convert Checkpoint to HuggingFace's Transformers
+
+In the fine-tuning and usage, it will be more convinent to convert the original fairseq checkpoints to [HuggingFace's Transfomers](https://github.com/huggingface/transformers).
+
+The conversion can be finished with [this code](https://github.com/huggingface/transformers/blob/master/src/transformers/models/roberta/convert_roberta_original_pytorch_checkpoint_to_pytorch.py). The example command is:
+
+```bash
+python -m transformers.convert_roberta_original_pytorch_checkpoint_to_pytorch.py \
+			--roberta_checkpoint_path path_to_KEPLER_checkpoint \
+			--pytorch_dump_folder_path path_to_output \
+```
+
+### TACRED
+
+We suggest to use the converted HuggingFace's Transformers checkpoint as well as the [OpenNRE](https://github.com/thunlp/OpenNRE) library to perform experiments on TACRED. An example code will be updated soon.
+
+To directly fine-tune KEPLER on TACRED in fairseq framework, please refer to [this script](examples/KEPLER/TACRED/TACRED.sh). The script requires 2x16GB V100 GPUs.
+
+### FewRel
+
+To finetune KEPLER on FewRel, you can use the offiicial code in the [FewRel repo](https://github.com/thunlp/FewRel) and set `--encoder roberta` as well as `--pretrained_checkpoint path_to_converted_KEPLER`.
+
+### OpenEntity
+
+Please refer to [this directory](examples/KEPLER/OpenEntity) and [this script](examples/KEPLER/OpenEntity/run_openentity.sh) for the codes of OpenEntity experiments.
+
+These codes are modified on top of [ERNIE](https://github.com/thunlp/ERNIE).
+
+### GLUE
+
+For the fine-tuning on GLUE tasks, refer to the [official guide of RoBERTa](examples/roberta/README.glue.md).
+
+Refer to [this directory](examples/KEPLER/GLUE) for the example scripts along with hyper-parameters.
+
+### Knowledge Probing (LAMA and LAMA-UHN)
+
+For the experiments on LAMA, please refer to the codes in the [LAMA repo](https://github.com/facebookresearch/LAMA) and set `--roberta_model_dir path_to_converted_KEPLER`.
+
+The LAMA-UHN dataset can be created with [this scirpt](https://github.com/facebookresearch/LAMA/blob/master/scripts/create_lama_uhn.py).
+
+## Usage for Knowledge Embedding
+
+We release the pre-trained [checkpoint for KE tasks](https://cloud.tsinghua.edu.cn/f/749183d2541c43a08568/?dl=1).
+
+The example codes for link prediction are to be finished.
 
 ## Citation
 
