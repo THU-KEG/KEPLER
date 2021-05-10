@@ -1,0 +1,57 @@
+package:
+  name: graphvite-mini
+  version: 0.2.1
+
+source:
+  path: ../..
+
+requirements:
+  build:
+    # cmake
+    - cmake >=3.12
+    - {{ compiler("cxx") }}
+    - glog
+    - gflags
+    - cudatoolkit {{ cudatoolkit }}
+    - python {{ python }}
+    - pybind11
+  host:
+    # make
+    - glog
+    - gflags
+    - cudatoolkit {{ cudatoolkit }}
+    - python {{ python }}
+    - pybind11
+    - numpy {{ numpy }}
+    - mkl >=2018
+    # setup
+    - pyyaml
+    - easydict
+    - six
+  run:
+    - glog
+    - gflags
+    - cudatoolkit
+    - python {{ python }}
+    - mkl >=2018
+    - numpy >=1.11
+    - pyyaml
+    - easydict
+    - six
+    - future
+    - psutil
+
+build:
+  string:
+    "py{{ python|replace('.', '') }}\
+    cuda{{ cudatoolkit|replace('.', '') }}\
+    h{{ environ.get('GIT_FULL_HASH')|string|truncate(7, True, '', 0) }}"
+
+test:
+  imports:
+    - graphvite
+
+about:
+  home: https://graphvite.io
+  license: Apache-2.0
+  summary: "A general and high-performance graph embedding system for various applications"
