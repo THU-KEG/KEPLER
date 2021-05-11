@@ -120,7 +120,7 @@ First, install the `graphvite` package in `./graphvite` following its instructio
 
 Then, download the Wikidata5m dataset from [this website](https://deepgraphlearning.github.io/project/wikidata5m).
 
-The next step is to use `ke_tool/evaluate_transe_transductive.py` and `ke_tool/evaluate_transe_inductive.py` for ke evaluation. The argguments are as following,
+The next step is to use `ke_tool/evaluate_transe_transductive.py` and `ke_tool/evaluate_transe_inductive.py` for KE evaluation. The arguments are as following,
 
 * `--entity_embeddings`: a numpy file storing the entity embeddings.
 * `--relation_embeddings`: a numpy file storing the relation embeddings.
