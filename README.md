@@ -125,7 +125,7 @@ The next step is to use `ke_tool/evaluate_transe_transductive.py` and `ke_tool/e
 * `--entity_embeddings`: a numpy file storing the entity embeddings.
 * `--relation_embeddings`: a numpy file storing the relation embeddings.
 * `--dim`: the dimension of the relation and entity embeddings.
-* `--entity2id`: a json file that maps entity names (in the dataset) to the ids in the entity embedding numpy file, where the key is the entity names in the dataset, and the valie is the id in the numpy file.
+* `--entity2id`: a json file that maps entity names (in the dataset) to the ids in the entity embedding numpy file, where the key is the entity names in the dataset, and the value is the id in the numpy file.
 * `--relation2id`: a json file that maps relation names (in the dataset) to the ids in the relation embedding numpy file.
 * `--dataset`: the test data file.
 * `--train_dataset`: the training data file (only for transductive setting).
