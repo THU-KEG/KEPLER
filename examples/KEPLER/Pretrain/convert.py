@@ -2,12 +2,12 @@ import argparse
 import json
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--text", type=str)
-parser.add_argument("--train", type=str)
-parser.add_argument("--valid", type=str)
-parser.add_argument("--converted_text", type=str, default="Qdesc.txt")
-parser.add_argument("--converted_train", type=str, default="train.txt")
-parser.add_argument("--converted_valid", type=str, default="valid.txt")
+parser.add_argument("--text", type=str, help="path to original text file")
+parser.add_argument("--train", type=str, help="path to original training data file")
+parser.add_argument("--valid", type=str, help="path to original validation data file")
+parser.add_argument("--converted_text", type=str, default="Qdesc.txt", help="path to converted text file")
+parser.add_argument("--converted_train", type=str, default="train.txt", help="path to converted training file")
+parser.add_argument("--converted_valid", type=str, default="valid.txt", help="path to converted validation file")
 
 if __name__=='__main__':
     args = parser.parse_args()

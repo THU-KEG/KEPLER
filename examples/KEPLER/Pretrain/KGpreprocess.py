@@ -12,6 +12,7 @@ parser.add_argument("--dumpPath", type=str, help="path to store output files, do
 parser.add_argument("-ns", "--negative_sampling_size", type=int, default=1)
 parser.add_argument("--train", type=str, help="file name of training triplets")
 parser.add_argument("--valid", type=str, help="file name of validation triplets")
+parser.add_argument("--ent_desc", type=str, help="path to the entity description file (after BPE encoding)")
 
 def getTriples(path):
     res=[]
@@ -116,7 +117,7 @@ if __name__=='__main__':
     ValidTriples = getTriples(args.valid)
     AllTriples = TrainTriples + ValidTriples
     Qdesc=[]
-    with open("Qdesc.bpe","r") as fin:
+    with open(args.ent_desc, "r") as fin:
         Qdesc=fin.readlines()
     print(str(datetime.now())+" load finish")
     count = count_frequency(AllTriples)

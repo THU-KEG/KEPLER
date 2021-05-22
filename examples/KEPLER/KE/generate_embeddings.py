@@ -1,41 +1,22 @@
 import numpy as np
-import torch
-import torch.nn.functional as F
-import json
 import os
 import argparse
 from fairseq.models.roberta import RobertaModel
 from fairseq.data import (
-    ConcatDataset,
     data_utils,
     Dictionary,
-    encoders,
-    IdDataset,
-    indexed_dataset,
-    MaskTokensDataset,
-    NestedDictionaryDataset,
-    NumelDataset,
-    NumSamplesDataset,
-    PadDataset,
     RightPadDataset,
     PrependTokenDataset,
-    SortDataset,
-    TokenBlockDataset,
-    FakeNumelDataset,
     TruncateDataset,
-    KEDataset,
-    RawLabelDataset,
-    RoundRobinZipDatasets,
-    KeNegDataset,
 )
 parser=argparse.ArgumentParser()
 parser.add_argument("--data", type=str, help="path to the entity decription data")
 parser.add_argument("--ckpt_dir", type=str, help="path of the checkpoint")
 parser.add_argument("--ckpt", type=str, help="filename of the checkpoint")
 parser.add_argument("--dict", type=str, help="path to the dict.txt file", default="bpe/dict.txt")
-parser.add_argument("--ent_emb", type=str, default="EntityEmb.npy", help="filename to save entity embedding")
-parser.add_argument("--rel_emb", type=str, default="RelEmb.npy", help="filename to save relation embedding")
-parser.add_argument("--batch_size", type=int, default=64, help="batch size used in inference")
+parser.add_argument("--ent_emb", type=str, default="EntityEmb.npy", help="filename to dump entity embeddings (in numpy format)")
+parser.add_argument("--rel_emb", type=str, default="RelEmb.npy", help="filename to dump relation embeddings (in numpy format)")
+parser.add_argument("--batch_size", type=int, default=64, help="batch size used in the inference")
 
 def desc_dataset(path, dictionary):
     now_path=path
