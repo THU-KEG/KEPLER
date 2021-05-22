@@ -367,7 +367,7 @@ class MLMetKETask(FairseqTask):
             gamma=args.gamma,
             nrelations=args.nrelation
         )
-        if self.args.double_ke:
+        if hasattr(self.args, "double_ke") and self.args.double_ke:
             model.register_ke_head(
                 args.ke_head_name2,
                 gamma=args.gamma2,

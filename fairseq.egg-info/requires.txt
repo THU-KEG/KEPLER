@@ -1,0 +1,6 @@
+cffi
+fastBPE
+numpy
+regex
+torch
+tqdm

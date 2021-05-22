@@ -77,9 +77,9 @@ class RobertaHubInterface(nn.Module):
     def extract_features(self, tokens: torch.LongTensor, return_all_hiddens: bool = False) -> torch.Tensor:
         if tokens.dim() == 1:
             tokens = tokens.unsqueeze(0)
-        if tokens.size(-1) > self.model.max_positions():
+        if tokens.size(-1) > self.model.max_positions()[0]:
             raise ValueError('tokens exceeds maximum length: {} > {}'.format(
-                tokens.size(-1), self.model.max_positions()
+                tokens.size(-1), self.model.max_positions()[0]
             ))
         features, extra = self.model(
             tokens.to(device=self.device),

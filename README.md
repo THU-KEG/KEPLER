@@ -74,15 +74,19 @@ We release the pre-trained [checkpoint for NLP tasks](https://cloud.tsinghua.edu
 
 ### Convert Checkpoint to HuggingFace's Transformers
 
-In the fine-tuning and usage, it will be more convinent to convert the original fairseq checkpoints to [HuggingFace's Transfomers](https://github.com/huggingface/transformers).
+In the fine-tuning and usage, it will be more convinent to convert the original fairseq checkpoints to [HuggingFace's Transformers](https://github.com/huggingface/transformers).
 
 The conversion can be finished with [this code](https://github.com/huggingface/transformers/blob/master/src/transformers/models/roberta/convert_roberta_original_pytorch_checkpoint_to_pytorch.py). The example command is:
 
 ```bash
-python -m transformers.convert_roberta_original_pytorch_checkpoint_to_pytorch.py \
+python -m transformers.convert_roberta_original_pytorch_checkpoint_to_pytorch \
 			--roberta_checkpoint_path path_to_KEPLER_checkpoint \
 			--pytorch_dump_folder_path path_to_output \
 ```
+
+The `path_to_KEPLER_checkpoint` should contain `model.pt` (the downloaded KEPLER checkpoint) and `dict.txt` (standard RoBERTa dictionary file).
+
+Note that the new versions of HuggingFace's Transformers library requires `fairseq>=0.9.0`, but the modified fairseq library in this repo and our checkpoints generated with is `fairseq 0.8.0`. The two versions are minorly different in checkpoint format. Hence `transformers<=2.2.2` or `pytorch_transformers` are needed for checkpoint conversion here.
 
 ### TACRED
 
