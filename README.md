@@ -70,7 +70,7 @@ Do negative sampling and dump the whole training and validation data:
 ```bash
 python KGpreprocess.py --dumpPath KE1 \
 		-ns 1 \
-		-ent_desc Qdesc.bpe \
+		--ent_desc Qdesc.bpe \
 		--train train.txt \
 		--valid valid.txt
 ```
