@@ -20,7 +20,7 @@ def getTriples(path):
         lines=fin.readlines()
         for l in lines:
             tmp=[int(x) for x in l.split()]
-            res.append((tmp[0],tmp[2],tmp[1]))
+            res.append((tmp[0], tmp[1], tmp[2]))
     return res
 
 def count_frequency(triples, start=4):
