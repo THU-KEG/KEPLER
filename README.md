@@ -11,7 +11,7 @@ Source code for TACL 2021 paper [KEPLER: A Unified Model for Knowledge Embedding
 
  ## Installation
 
-This repo is developed on top of [fairseq](https://github.com/pytorch/fairseq) and you can install our version like installing fairseq from source:
+This repo is developed on top of [fairseq](https://github.com/pytorch/fairseq) and you need to install our version like installing fairseq from source:
 
 ```bash
 pip install cython
