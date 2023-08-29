@@ -28,7 +28,7 @@ Refer to [the RoBERTa document](examples/roberta/README.pretraining.md) for the 
 
 ### Preprocessing for KE data
 
-<span id="KEpre">The pre-training with KE objective requires the [Wikidata5M dataset](https://deepgraphlearning.github.io/project/wikidata5m). Here we use the transductive split of Wikidata5M to demonstrate how to preprocess the KE data. The scripts used below are in [this folder](examples/KEPLER/Pretrain/). </span>
+<span id="KEpre">The pre-training with KE objective requires the [Wikidata5M dataset](https://deepgraphlearning.github.io/project/wikidata5m) (an alternative download source which shall be faster within China is [Tsinghua Cloud](https://cloud.tsinghua.edu.cn/d/ebddf21e78c8494d9b0a/)). Here we use the transductive split of Wikidata5M to demonstrate how to preprocess the KE data. The scripts used below are in [this folder](examples/KEPLER/Pretrain/). </span>
 
 Download the Wikidata5M transductive data and its corresponding corpus, and then uncompress them:
 
@@ -226,8 +226,8 @@ Then use [`evaluate_transe_transductive.py`](examples/KEPLER/KE/evaluate_transe_
 * `--entity_embeddings`: a numpy file storing the entity embeddings.
 * `--relation_embeddings`: a numpy file storing the relation embeddings.
 * `--dim`: the dimension of the relation and entity embeddings.
-* `--entity2id`: a json file that maps entity names (in the dataset) to the ids in the entity embedding numpy file, where the key is the entity names in the dataset, and the value is the id in the numpy file.
-* `--relation2id`: a json file that maps relation names (in the dataset) to the ids in the relation embedding numpy file.
+* `--entity2id`: a json file that maps entity names (in the dataset) to the indices in the entity embedding numpy file, where the key is the entity names in the dataset, and the value is the indice in the numpy file.
+* `--relation2id`: a json file that maps relation names (in the dataset) to the indices in the relation embedding numpy file.
 * `--dataset`: the test data file.
 * `--train_dataset`: the training data file (only for transductive setting).
 * `--val_dataset`: the validation data file (only for transductive setting).
