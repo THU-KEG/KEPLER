@@ -28,7 +28,7 @@ Refer to [the RoBERTa document](examples/roberta/README.pretraining.md) for the 
 
 ### Preprocessing for KE data
 
-<span id="KEpre">The pre-training with KE objective requires the [Wikidata5M dataset](https://deepgraphlearning.github.io/project/wikidata5m) (an alternative download source which shall be faster within China is [Tsinghua Cloud](https://cloud.tsinghua.edu.cn/d/ebddf21e78c8494d9b0a/)). Here we use the transductive split of Wikidata5M to demonstrate how to preprocess the KE data. The scripts used below are in [this folder](examples/KEPLER/Pretrain/). </span>
+<span id="KEpre">The pre-training with KE objective requires the [Wikidata5M dataset](https://deepgraphlearning.github.io/project/wikidata5m) (an alternative download source which shall be faster within China is [Tsinghua Cloud](https://cloud.tsinghua.edu.cn/d/ebddf21e78c8494d9b0a/)). Here we use the transductive split of Wikidata5M to demonstrate how to preprocess the KE data.
 
 Download the Wikidata5M transductive data and its corresponding corpus, and then uncompress them:
 
@@ -42,7 +42,7 @@ gzip -d wikidata5m_text.txt.gz
 Convert the original Wikidata5M files into the numerical format used in pre-training:
 
 ```bash
-python convert.py --text wikidata5m_text.txt \
+python ./examples/KEPLER/Pretrain/convert.py --text wikidata5m_text.txt \
 		--train wikidata5m_transductive_train.txt \
 		--valid wikidata5m_transductive_valid.txt \
 		--converted_text Qdesc.txt \
@@ -68,7 +68,7 @@ python -m examples.roberta.multiprocessing_bpe_encoder \
 Do negative sampling and dump the whole training and validation data:
 
 ```bash
-python KGpreprocess.py --dumpPath KE1 \
+python ./examples/KEPLER/Pretrain/KGpreprocess.py --dumpPath KE1 \
 		-ns 1 \
 		--ent_desc Qdesc.bpe \
 		--train train.txt \
